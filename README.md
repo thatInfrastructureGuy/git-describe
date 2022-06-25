@@ -41,7 +41,7 @@ const Version = "v0.0.1"
 
 <details>
 <summary>
-  How do I change generated filename/variable name/package name?
+  How do I change generated filename / variable name /package name ?
 </summary> 
   
   ```
