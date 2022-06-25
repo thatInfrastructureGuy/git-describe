@@ -2,7 +2,7 @@
 
 * Runs `git describe --abbrev=7 --dirty`
 * Generates .go file containing binary version.
-* Alternative to `go build -ldflags "-X=xxx.Version=${VERSION}"` command.
+* Alternative to `go build -ldflags "-X=xxx.Version=$(git describe --abbrev=7 --dirty)"` command.
 
 ## Prerequisites
 * git
