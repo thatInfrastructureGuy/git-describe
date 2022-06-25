@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-//go:generate go run generateversion.go
+//go:generate go run main.go
 
 package main
 
@@ -23,11 +23,11 @@ import (
 	"flag"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
-	"strings"
 	"text/template"
 	"time"
+
+	"github.com/thatInfrastructureGuy/generate-version/version"
 )
 
 const (
@@ -61,7 +61,7 @@ func main() {
 		Timestamp:    time.Now(),
 		PackageName:  packageName,
 		VariableName: variableName,
-		Version:      GetVersion(),
+		Version:      version.GetVersion(),
 	})
 }
 
@@ -82,23 +82,4 @@ func parseFlags() (string, string, string) {
 	variablePtr := flag.String("variable", defaultVariableName, "Variable name used to store version.\nDefault: "+defaultVariableName)
 
 	return *filePtr, *packageNamePtr, *variablePtr
-}
-
-// GetVersion gets version by executing "git describe --abbrev=7 --dirty"
-// Needs git binary present.
-// In absense of git binary, version is set to "UNKNOWN"
-func GetVersion() string {
-	git, err := exec.LookPath("git")
-	if err != nil {
-		log.Println("Error finding git:", err)
-		return "UNKNOWN"
-	}
-
-	output, err := exec.Command(git, "describe", "--dirty", "--abbrev=7").Output()
-	if err != nil {
-		log.Println("Error executing git describe:", err)
-		return "UNKNOWN"
-	}
-
-	return strings.Trim(string(output), " \n\t\r")
 }
