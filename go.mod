@@ -1,3 +1,3 @@
-module github.com/thatInfrastructureGuy/generate-version
+module github.com/thatInfrastructureGuy/git-describe
 
 go 1.18

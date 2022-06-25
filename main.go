@@ -27,7 +27,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/thatInfrastructureGuy/generate-version/version"
+	"github.com/thatInfrastructureGuy/git-describe/version"
 )
 
 const (

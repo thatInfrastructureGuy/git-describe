@@ -1,4 +1,4 @@
-# generate-version
+# git-describe
 
 * Runs `git describe --abbrev=7 --dirty`
 * Generates .go file containing binary version.
@@ -10,7 +10,7 @@
 ## How to use
 
 ```
-go run github.com/thatInfrastructureGuy/generate-version@latest && go build <<your-program>>
+go run github.com/thatInfrastructureGuy/git-describe@latest && go build <<your-program>>
 ```
 
 Probably you should put it in your tools.go file.
@@ -18,7 +18,7 @@ Probably you should put it in your tools.go file.
 ### What happens on running this program?
 
 ```
-go run github.com/thatInfrastructureGuy/generate-version@latest
+go run github.com/thatInfrastructureGuy/git-describe@latest
 ```
 
 A new file gets created `version/const.go` with following contents:
@@ -49,7 +49,7 @@ const Version = "v0.0.1"
 </summary> 
   
   ```
-  go run github.com/thatInfrastructureGuy/generate-version@latest \
+  go run github.com/thatInfrastructureGuy/git-describe@latest \
      --filepath=version/version.go --package=version --variable=VERSION
   ```
 </details>
