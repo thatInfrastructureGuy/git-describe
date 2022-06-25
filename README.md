@@ -31,39 +31,44 @@ const Version = "v0.0.1"
 
 <details>
 <summary>
-I get an ERROR and the file has UNKNOWN version:  `const Version = "UNKNOWN"`
+  I get an ERROR and the file has UNKNOWN version? 
 </summary>
-1. Please make sure you have `git` binary installed.
-2. Check the output of `git describe --abbrev=7 --dirty` manually for your repository.
+  
+  `const Version = "UNKNOWN"`
+  1. Please make sure you have `git` binary installed.
+  2. Check the output of `git describe --abbrev=7 --dirty` manually for your repository.
 </details>
 
 <details>
 <summary>
-How do I change generated filename/variable name/package name?
-</summary>
-```
-go run github.com/thatInfrastructureGuy/generate-version@latest --filepath=version/version.go --package=version --variable=VERSION
-```
+  How do I change generated filename/variable name/package name?
+</summary> 
+  
+  ```
+  go run github.com/thatInfrastructureGuy/generate-version@latest \
+     --filepath=version/version.go --package=version --variable=VERSION
+  ```
 </details>
 
 <details>
 <summary>
-Why do this?
+  Why do this?
 </summary>
-* I always had to look up `go build -ldflags` command.
-* I wanted the build to error out if I _forgot_ to generate version. Now, my program fails to build if I forget to generate version, because somewhere in there it is looking for a const `Version` which is nowhere defined. Just make sure you using the `Version` variable somewhere in your program for it to error out.
+  
+  * I always had to look up `go build -ldflags` command.
+  * I wanted the build to error out if I _forgot_ to generate version. Just make sure you using the `Version` variable somewhere in your program for it to error out.
 </details>
 
 <details>
 <summary>
-Is this method better than using ldflags?
+  Is this method better than using ldflags?
 </summary>
-I am not sure.
+  I am not sure.
 </details>
 
 <details>
 <summary>
-I do not use `git`. Can I use this program?
+  I do not use `git`. Can I use this program?
 </summary>
-No. PRs welcome. :)
+  No. PRs welcome. :)
 </details>
