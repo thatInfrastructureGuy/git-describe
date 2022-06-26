@@ -84,6 +84,7 @@ func parseFlags() (string, string, string) {
 	filePtr := flag.String("filepath", defaultFilename, "Filepath where contents should get generated. It should be a .go file.\nDefault: "+defaultFilename)
 	packageNamePtr := flag.String("package", defaultPackageName, "Name of the package where file should be generated.\nDefault: "+defaultPackageName)
 	variablePtr := flag.String("variable", defaultVariableName, "Variable name used to store version.\nDefault: "+defaultVariableName)
+	flag.Parse()
 
 	return *filePtr, *packageNamePtr, *variablePtr
 }

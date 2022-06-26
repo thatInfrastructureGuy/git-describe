@@ -56,9 +56,9 @@ const Version = "v0.0.1"
 
 <details>
 <summary>
-  Why do this?
+  Why?
 </summary>
-  
+
   * I always had to look up `go build -ldflags` command.
   * I wanted the build to error out if I _forgot_ to generate version. Just make sure you using the `Version` variable somewhere in your program for it to error out.
 </details>
