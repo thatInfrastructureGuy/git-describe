@@ -21,6 +21,7 @@ package main
 
 import (
 	"flag"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -48,7 +49,7 @@ func main() {
 	generateVersionFile(f, packageName, variableName)
 }
 
-func generateVersionFile(f *os.File, packageName, variableName string) {
+func generateVersionFile(w io.Writer, packageName, variableName string) {
 	packageTemplate := template.Must(template.New("").Parse(`// THIS IS GENERATED CODE; DO NOT EDIT.
 // Generated at {{ .Timestamp }}
 package {{.PackageName}}
@@ -56,7 +57,7 @@ package {{.PackageName}}
 const {{.VariableName}} = "{{ .Version }}"
 `))
 
-	packageTemplate.Execute(f, struct {
+	packageTemplate.Execute(w, struct {
 		Timestamp    time.Time
 		PackageName  string
 		VariableName string
