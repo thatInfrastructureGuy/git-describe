@@ -67,7 +67,7 @@ const Version = "v0.0.1"
 <summary>
   Is this method better than using ldflags?
 </summary>
-  I am not sure.
+  ¯\_(ツ)_/¯
 </details>
 
 <details>
