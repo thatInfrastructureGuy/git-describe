@@ -73,7 +73,7 @@ const Version = "v0.0.1"
 | Git-Describe Features | Go 1.18  | 
 |-----------------------|----------|
 |Git SHA| ✅ | 
-|Git Tag| ❌ | 
+|Git Tag| ❌ Works with `go install`. `go build` returns `(develop)`| 
 |Number of commits since last tag| ❌ |
 |Dirty Flag| ✅ |
 
