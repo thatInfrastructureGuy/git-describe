@@ -17,6 +17,10 @@
 
 //go:generate go run main.go
 
+// git-describe dynamically generates version information
+// needed at the time of build. This information should be injected during build time.
+// go run github.com/thatInfrastructureGuy/git-describe@latest
+// See https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module
 package main
 
 import (
@@ -28,17 +32,18 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/thatInfrastructureGuy/git-describe/version"
+	"github.com/thatInfrastructureGuy/git-describe/helper"
 )
 
 const (
 	defaultFilename     = "version/const.go"
 	defaultPackageName  = "version"
 	defaultVariableName = "Version"
+	defaultCommand      = "git describe --dirty --abbrev=7"
 )
 
 func main() {
-	fileName, packageName, variableName := parseFlags()
+	fileName, packageName, variableName, command := parseFlags()
 
 	f, err := create(fileName)
 	if err != nil {
@@ -46,10 +51,10 @@ func main() {
 	}
 	defer f.Close()
 
-	generateVersionFile(f, packageName, variableName)
+	generateVersionFile(f, packageName, variableName, command)
 }
 
-func generateVersionFile(w io.Writer, packageName, variableName string) {
+func generateVersionFile(w io.Writer, packageName, variableName, command string) {
 	packageTemplate := template.Must(template.New("").Parse(`// THIS IS GENERATED CODE; DO NOT EDIT.
 // Generated at {{ .Timestamp }}
 package {{.PackageName}}
@@ -67,7 +72,7 @@ const {{.VariableName}} = "{{ .Version }}"
 		Timestamp:    time.Now(),
 		PackageName:  packageName,
 		VariableName: variableName,
-		Version:      version.GetVersion(),
+		Version:      helper.ExecCommand(command),
 	})
 }
 
@@ -82,11 +87,12 @@ func create(filename string) (*os.File, error) {
 	return f, nil
 }
 
-func parseFlags() (string, string, string) {
-	filePtr := flag.String("filepath", defaultFilename, "Filepath where contents should get generated. It should be a .go file.\nDefault: "+defaultFilename)
-	packageNamePtr := flag.String("package", defaultPackageName, "Name of the package where file should be generated.\nDefault: "+defaultPackageName)
-	variablePtr := flag.String("variable", defaultVariableName, "Variable name used to store version.\nDefault: "+defaultVariableName)
+func parseFlags() (string, string, string, string) {
+	filePtr := flag.String("filepath", defaultFilename, "Filepath where contents should get generated. It should be a .go file.")
+	packageNamePtr := flag.String("package", defaultPackageName, "Name of the package where file should be generated.")
+	variablePtr := flag.String("variable", defaultVariableName, "Variable name used to store version.")
+	CommandPtr := flag.String("command", defaultCommand, "Command to run. Flag format: --key=value.")
 	flag.Parse()
 
-	return *filePtr, *packageNamePtr, *variablePtr
+	return *filePtr, *packageNamePtr, *variablePtr, *CommandPtr
 }

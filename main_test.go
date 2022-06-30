@@ -12,7 +12,7 @@ func TestGenerateVersionFile(t *testing.T) {
 	buf := bytes.Buffer{}
 	pkgName := "testpkg"
 	variableName := "testVar"
-	generateVersionFile(&buf, pkgName, variableName)
+	generateVersionFile(&buf, pkgName, variableName, defaultCommand)
 	if !strings.Contains(buf.String(), "package "+pkgName) {
 		t.Errorf("Package name is not set to %v\n", pkgName)
 	}

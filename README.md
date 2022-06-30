@@ -3,9 +3,10 @@
 * Runs `git describe --abbrev=7 --dirty`
 * Generates .go file containing binary version.
 * Alternative to `go build -ldflags "-X=xxx.Version=$(git describe --abbrev=7 --dirty)"` command.
+* Ability to customize command via `--command` flag.
 
 ## Prerequisites
-* git
+* git (if using default command)
 
 ## How to use
 
@@ -39,7 +40,7 @@ const Version = "v0.0.1"
 <summary>
   I get an ERROR and the file has UNKNOWN version? 
 </summary>
-  
+
   `const Version = "UNKNOWN"`
   1. Please make sure you have `git` binary installed.
   2. Check the output of `git describe --abbrev=7 --dirty` manually for your repository.
@@ -49,7 +50,7 @@ const Version = "v0.0.1"
 <summary>
   How do I change generated filename / variable name /package name ?
 </summary> 
-  
+
   ```
   go run github.com/thatInfrastructureGuy/git-describe@latest \
      --filepath=version/version.go --package=version --variable=Version
@@ -70,11 +71,4 @@ const Version = "v0.0.1"
   Is this method better than using ldflags?
 </summary>
   ¯\_(ツ)_/¯
-</details>
-
-<details>
-<summary>
-  I do not use `git`. Can I use this program?
-</summary>
-  No. PRs welcome. :)
 </details>
