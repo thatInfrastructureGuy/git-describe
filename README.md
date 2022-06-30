@@ -62,8 +62,22 @@ const Version = "v0.0.1"
   Why?
 </summary>
 
-  * Its hard to remember `go build -ldflags` command.
   * I wanted the build to error out if I _forgot_ to generate version. Just make sure you using the `Version` variable somewhere in your program for it to error out.
+
+</details>
+
+<details>
+<summary>
+ Go 1.18 already has build information.
+</summary>
+   
+| Git-Describe Features | Go 1.18  | 
+|-----------------------|----------|
+|Git SHA| ✅ | 
+|Git Tag| ❌ Works with `go install`.`go build` returns `(devel)`. https://github.com/golang/go/issues/50603 | 
+|Number of commits since last tag| ❌ |
+|Dirty Flag| ✅ |
+
 </details>
 
 <details>
