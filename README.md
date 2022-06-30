@@ -70,7 +70,7 @@ const Version = "v0.0.1"
 <summary>
  Go 1.18 already has build information.
 </summary>
-   
+ 
 | Git-Describe Features | Go 1.18  | 
 |-----------------------|----------|
 |Git SHA| ✅ | 
