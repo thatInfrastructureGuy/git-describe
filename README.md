@@ -1,3 +1,5 @@
+> Archived in favor of golang/go#50603
+
 # git-describe
 
 * Runs `git describe --abbrev=7 --dirty`
